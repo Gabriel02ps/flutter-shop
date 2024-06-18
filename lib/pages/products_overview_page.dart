@@ -15,7 +15,8 @@ class ProductsOverviewPage extends StatelessWidget {
       appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.deepPurple,
-          title: const Text('MyShop', style: TextStyle(color: Colors.white))),
+          title:
+              const Text('Minha Loja', style: TextStyle(color: Colors.white))),
       body: GridView.builder(
         padding: const EdgeInsets.all(10),
         itemCount: loadedProducts.length,
