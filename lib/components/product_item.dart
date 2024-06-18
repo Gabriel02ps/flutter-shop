@@ -12,10 +12,16 @@ class ProductItem extends StatelessWidget {
       child: GridTile(
         footer: GridTileBar(
             title: Text(product.title, textAlign: TextAlign.center),
+            leading: IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.favorite),
+              color: Theme.of(context).hintColor,
+            ),
             trailing: IconButton(
-                onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
-            leading:
-                IconButton(onPressed: () {}, icon: const Icon(Icons.favorite)),
+              onPressed: () {},
+              icon: const Icon(Icons.shopping_cart),
+              color: Theme.of(context).hintColor,
+            ),
             backgroundColor: Colors.black54),
         child: Image.network(product.imageUrl, fit: BoxFit.cover),
       ),
