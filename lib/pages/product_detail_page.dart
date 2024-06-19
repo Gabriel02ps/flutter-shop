@@ -15,7 +15,7 @@ class ProductDetailPage extends StatelessWidget {
           iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Colors.deepPurple,
           title: Text(
-            product.title,
+            product.name,
             style: const TextStyle(color: Colors.white),
           )),
     );
