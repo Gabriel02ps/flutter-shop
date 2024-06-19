@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/app_drawer.dart';
 import 'package:shop/components/cart_badge.dart';
 import 'package:shop/components/product_grid.dart';
 import 'package:shop/models/cart.dart';
@@ -19,9 +20,12 @@ class ProductsOverviewPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
         title: const Text('Minha Loja', style: TextStyle(color: Colors.white)),
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Change your color here
+        ),
         actions: [
           PopupMenuButton(
-              icon: const Icon(Icons.more_vert, color: Colors.white),
+              icon: const Icon(Icons.more_vert),
               itemBuilder: (_) => [
                     const PopupMenuItem(
                       value: FilterOptions.favorite,
@@ -44,7 +48,7 @@ class ProductsOverviewPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pushNamed(AppRoutes.cart);
                   },
-                  icon: const Icon(Icons.shopping_cart, color: Colors.white)),
+                  icon: const Icon(Icons.shopping_cart)),
               builder: (ctx, cart, child) => CartBadge(
                     value: cart.itemsCount.toString(),
                     child: child!,
@@ -52,6 +56,7 @@ class ProductsOverviewPage extends StatelessWidget {
         ],
       ),
       body: const ProductGrid(),
+      drawer: const AppDrawer(),
     );
   }
 }
