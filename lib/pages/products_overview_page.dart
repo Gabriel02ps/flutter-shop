@@ -4,6 +4,7 @@ import 'package:shop/components/cart_badge.dart';
 import 'package:shop/components/product_grid.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/product_list.dart';
+import 'package:shop/utils/app_routes.dart';
 
 enum FilterOptions { favorite, all }
 
@@ -40,7 +41,9 @@ class ProductsOverviewPage extends StatelessWidget {
               }),
           Consumer<Cart>(
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AppRoutes.cart);
+                  },
                   icon: const Icon(Icons.shopping_cart, color: Colors.white)),
               builder: (ctx, cart, child) => CartBadge(
                     value: cart.itemsCount.toString(),
