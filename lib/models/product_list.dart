@@ -36,8 +36,8 @@ class ProductList with ChangeNotifier {
     }
   }
 
-  Future<void> addProduct(Product product) {
-    final future = http.post(
+  Future<void> addProduct(Product product) async {
+    final response = await http.post(
       Uri.parse('$_baseUrl/products.json'),
       body: jsonEncode(
         {
@@ -48,8 +48,8 @@ class ProductList with ChangeNotifier {
         },
       ),
     );
-    future.then((response) {
-      final id = jsonDecode(response.body)['name'];
+
+     final id = jsonDecode(response.body)['name'];
       _items.add(
         Product(
           id: id,
@@ -61,7 +61,6 @@ class ProductList with ChangeNotifier {
         ),
       );
       notifyListeners();
-    });
   }
 
   Future<void> updateProduct(Product product) {
