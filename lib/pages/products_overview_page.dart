@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/components/app_drawer.dart';
+import 'package:shop/components/cart_badge.dart';
 import 'package:shop/components/product_grid.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/product_list.dart';
@@ -41,7 +42,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
         iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text('Minha Loja', style: TextStyle(color: Colors.white)),
+        title: const Text('Loja', style: TextStyle(color: Colors.white)),
         actions: [
           PopupMenuButton(
             icon: const Icon(Icons.more_vert),
@@ -66,17 +67,16 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
             },
           ),
           Consumer<Cart>(
-            child: IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.cart);
-              },
-              icon: const Icon(Icons.shopping_cart),
-            ),
-            builder: (ctx, cart, child) => Badge(
-              label: Text(cart.itemsCount.toString()),
-              child: child!,
-            ),
-          ),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(AppRoutes.cart);
+                },
+                icon: const Icon(Icons.shopping_cart),
+              ),
+              builder: (ctx, cart, child) => CartBadge(
+                    value: cart.itemsCount.toString(),
+                    child: child!,
+                  ))
         ],
       ),
       body: _isLoading

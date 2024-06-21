@@ -1,5 +1,3 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/models/product.dart';
@@ -81,15 +79,15 @@ class _ProductFormPageState extends State<ProductFormPage> {
 
     _formKey.currentState?.save();
 
-    setState(() {
-      _isLoading = true;
-    });
+    setState(() => _isLoading = true);
 
     try {
       await Provider.of<ProductList>(
         context,
         listen: false,
       ).saveProduct(_formData);
+
+      Navigator.of(context).pop();
     } catch (error) {
       await showDialog<void>(
         context: context,
@@ -98,19 +96,14 @@ class _ProductFormPageState extends State<ProductFormPage> {
           content: const Text('Ocorreu um erro para salvar o produto.'),
           actions: [
             TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Fechar'),
+              child: const Text('Ok'),
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ],
         ),
       );
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
-      Navigator.of(context).pop();
+      setState(() => _isLoading = false);
     }
   }
 
@@ -118,11 +111,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.deepPurple,
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text('Formulário de Produto',
-            style: TextStyle(color: Colors.white)),
+        title: const Text('Formulário de Produto'),
         actions: [
           IconButton(
             onPressed: _submitForm,
@@ -131,7 +120,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
           : Padding(
               padding: const EdgeInsets.all(15),
               child: Form(
@@ -148,15 +139,12 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       onSaved: (name) => _formData['name'] = name ?? '',
                       validator: (_name) {
                         final name = _name ?? '';
-
                         if (name.trim().isEmpty) {
                           return 'Nome é obrigatório.';
                         }
-
                         if (name.trim().length < 3) {
                           return 'Nome precisa no mínimo de 3 letras.';
                         }
-
                         return null;
                       },
                     ),
